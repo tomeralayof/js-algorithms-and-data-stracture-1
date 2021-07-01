@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    class Node {
+      constructor(val) {
+        this.val = val;
+        this.next = null;
+      }
+    }
+
+    class Queues {
+      constructor() {
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+      }
+
+      push(val) {
+        let newNode = new Node(val);
+        if (!this.first) {
+          this.first = newNode;
+          this.last = newNode;
+        }
+        this.last.next = newNode;
+        this.last = newNode;
+
+        this.size++;
+        return this;
+      }
+
+      removeFirst() {
+        if (!this.first) return undefined;
+        if (this.size === 1) {
+          this.first = null;
+          this.last = null;
+          this.size = 0;
+        }
+        let curFirst = this.first;
+        this.first = curFirst.next;
+        this.first.next = curFirst.next.next;
+        this.size--;
+        return this;
+      }
+
+      print() {
+        let arr = [];
+        let curFirst = this.first;
+        while (curFirst) {
+          arr.push(curFirst.val);
+          curFirst = curFirst.next;
+        }
+        return arr;
+      }
+    }
+
+    let list = new Queues();
+    list.push(0);
+    list.push(1);
+    list.push(2);
+
+    list.removeFirst();
+
+    console.log(list);
+    console.log(list.print());
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    // The charCodeAt() method returns an integer between 0 and 65535
+    const sentence = 'bhe quick brown fox jumps over the lazy dog.';
+
+    const index = 0;
+
+    console.log(`The character code ${sentence.charCodeAt(index)} is equal to ${sentence.charAt(index)}`);
+    // expected output: "The character code 113 is equal to q";
+
+    // imagine we have a array with a length of 100. and we want to store the color pink to be a number inside this array. so out function needs to get an input of the name of the color, and the length of the array and store it in a number between 0 to 99.
+
+
+    //hash("pink",100);
+
+    //utf16-characters word for each character.
+
+    //the chartCodeAt => starts translating a from 97. we want it to statt from 1.
+
+
+
+
+
+    console.log("%c----------> hashing function", 'color:red;font-size:40px');
+
+    //key is a string
+    //arrLen will be the length of the array.
+    function hash(key, arrLen) {
+      let number = 0;
+      let WEIRED_PRIME = 31;
+      for (let i = 0; i < Math.min(key.length, 100); i++) {
+        number = (number * WEIRED_PRIME) + key.charCodeAt(i) - 96;
+        number > 0 ? number : number = number + 96;
+        number = number % arrLen;
+      }
+      return number;
+    }
+
+
+    console.log(hash("a", 3));
+    console.log(hash("k", 3));
+    console.log(hash("z", 3));
+
+
+    function hash11(key, arrayLen) {
+      let total = 0;
+      let WEIRD_PRIME = 31;
+      for (let i = 0; i < Math.min(key.length, 100); i++) {
+        let char = key[i];
+        let value = char.charCodeAt(0) - 96
+        total = (total * WEIRD_PRIME + value) % arrayLen;
+      }
+      return total;
+    }
+
+
+    function hash11(key, arrayLen) {
+      let total = 0;
+      let WEIRD_PRIME = 31;
+      for (let i = 0; i < Math.min(key.length, 100); i++) {
+        let char = key[i];
+        let value = char.charCodeAt(0) - 96;
+        // console.log(value, "this value is...");
+        total = (total * WEIRD_PRIME + value) % arrayLen;
+        // console.log((total * WEIRD_PRIME + value) % arrayLen, "this is the result")
+      }
+      // console.log(total, "this is the total");
+      return total;
+    }
+
+
+
+    //modulo - כמה פעמים נכנס מספר שאחרי האופרטור בתור המספר שהצבנו בלי שארית
+
+
+    // function hashLecture(key, arrLen) {
+    //   let total = 0;
+    //   for (let chart of key) {
+    //     let value = chart.charCodeAt(0) - 96;
+    //     total = (total + value) % arrLen
+    //   }
+    //   return total;
+    // }
+
+
+    // // console.log(hashLecture("Aaaaaaa", 11));
+
+
+
+    // //composite number: composite number is a number that can have more that 2  integers bellow of it that by multiplying them the result would be that number.
+    // // for example: the number 12:  12 and 1 => 12X1 = 12 , 6 and 2 => 6X2 = 12 , 4 and 3 => 4X3=12. in this example we have in total 6 numbers so the number will be a composite number. to make long story short, every even number is considered to be a composite number.
+
+    // // prime number: prime number is a number that can have only 2 integers bellow of it that by multiplying them the result will be this number, in other words, only this number and 1. 
+    // //for example, the number 2. 1 and 2 => 1X2 = 2. there are no other integer numbers bellow of it that by multiplying them we would get this specific number. 
+
+
+
+
+    // function hash11(key, arrayLen) {
+    //   let total = 0;
+    //   let WEIRD_PRIME = 31;
+    //   for (let i = 0; i < Math.min(key.length, 100); i++) {
+    //     let char = key[i];
+    //     let value = char.charCodeAt(0) - 96;
+    //     console.log(value, "this value is...");
+    //     total = (total * WEIRD_PRIME + value) % arrayLen;
+    //     console.log((total * WEIRD_PRIME + value) % arrayLen, "this is the result")
+    //   }
+    //   console.log(total, "this is the total");
+    //   return total;
+    // }
+
+
+
+    // //[orange,yellow,red];
+
+    // //total => 2 indexes.
+    // //we want to make the names to get an index inside an array.
+
+
+
+
+
+
+
+
+
+    // // console.log(hash11("a", 13));
+
+    // // console.log(32 % 13);
+
+    // function hash21(key, arrLen) {
+    //   let total = 0;
+
+    //   for (let i = 0; i < Math.min(key.length, 100); i++) {
+    //     total += key.charCodeAt(i) - 96;
+    //     total > 0 ? total : total = total + 96;
+    //     total = total % arrLen;
+    //   }
+    //   return total;
+    // }
+
+
+
+
+    // console.log("%c---------- For Shiraz>", 'color:blue;font-size:40px');
+    // console.log(hash21("abc", 1));
+
+    // console.log(hash21("aaaaaa", 1));
+
+    // console.log(hash21("cc", 1));
+
+
+
+    // //13 % 3 => 1. 
+
+    // //12 % 2 => 6(0) , 13 % 2 => 1. 10 % 7 =>  7(3). 
+
+    // //6 % 1 => 0.
+
+
+    console.log("%c---------->Hash Table Class", 'color: purple;font-size:40px');
+
+    class HashTable {
+      constructor(size = 53) {
+        this.keyMap = new Array(size);
+      }
+
+      _hash(key) {
+        let total = 0;
+        let WEIRD_PRIME = 31;
+        for (let i = 0; i < Math.min(key.length, 100); i++) {
+          let char = key[i];
+          let value = char.charCodeAt(0) - 96
+          total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+        }
+        return total;
+      }
+
+
+      set(key, value) {
+        let index = this._hash(key);
+        if (!this.keyMap[index]) {
+          this.keyMap[index] = [];
+        }
+        this.keyMap[index].push([key, value]);
+      }
+
+
+      get(key) {
+        let index = this._hash(key);
+        for (let i = 0; i < this.keyMap[index].length; i++) {
+          if (this.keyMap[index][i][0] === key) return key;
+        }
+        return undefined;
+      }
+
+    }
+
+    let hashTable = new HashTable(54);
+
+
+    hashTable.set('pink', '#frg543');
+    hashTable.set('pink', '#frg543');
+    hashTable.set('gray', '#frg543');
+    console.log(hashTable.get("pink"));
+
+    // console.log(hashTable.get("pink"))
+    console.log(hashTable);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // class HashTable1 {
+    //   constructor(size = 40) {
+    //     this.keyMap = new Array(size);
+    //   }
+
+    //   _hash(key) {
+    //     let total = 0;
+    //     let WEIRD_PRIME = 31;
+    //     for (let i = 0; i < Math.min(key.length, 100); i++) {
+    //       let char = key[i];
+    //       let value = char.charCodeAt(0) - 96
+    //       total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+    //     }
+    //     return total;
+    //   }
+    //   set(key, value) {
+    //     let index = this._hash(key);
+    //     if (!this.keyMap[index]) {
+    //       this.keyMap[index] = [];
+    //     }
+    //     this.keyMap[index].push([key, value]);
+    //   }
+
+    // }
+
+    // let ht = new HashTable1(40);
+    // ht.set("maroon", "#800000")
+    // ht.set("yellow", "#FFFF00")
+    // ht.set("yellow", "#FFFF00")
+
+
+    // console.log(ht)
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    class Node {
+      constructor(val) {
+        this.val = val;
+        this.prev = null;
+        this.next = null;
+      }
+    }
+
+    class DoubleLinkedList {
+      constructor() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+      }
+
+      push(val) {
+        let newNode = new Node(val);
+        if (!this.head) {
+          this.head = newNode;
+          this.tail = newNode;
+        }
+        else {
+          this.tail.next = newNode;
+          newNode.prev = this.tail;
+          this.tail = newNode;
+        }
+        this.length++
+        return this;
+      }
+
+      print() {
+        //show the result in an array
+        let arr = [];
+        let current = this.head;
+        while (current) {
+          arr.push(current.val);
+          current = current.next;
+        }
+        return arr;
+      }
+
+      pop() {
+        //remove the last element on the list
+        if (!this.head) return null;
+        let current = this.tail;
+
+        if (list.length === 1) {
+          this.head = null;
+          this.tail = null;
+        }
+
+        else {
+          this.tail = current.prev;
+          this.tail.next = null;
+          current.prev = null;
+        }
+        this.length--;
+        return current;
+      }
+
+      shift() {
+        //removing the first node from the list.
+        if (!this.head) return undefined;
+        let currHead = this.head;
+        let nextNode = currHead.next;
+        if (this.length === 1) {
+          this.head = null;
+          this.tail = null;
+        }
+        else {
+          this.head = nextNode;
+          this.head.prev = null;
+          currHead.next = null;
+        }
+        this.length--;
+        return currHead;
+      }
+
+      unshift(val) {
+        //adding a new node to the beginning of the list.
+        let newNode = new Node(val);
+        if (!this.head) this.push(val);
+        let currHead = this.head;
+        this.head = newNode;
+        this.head.next = currHead;
+        currHead.prev = newNode;
+        this.length++
+        return this;
+      }
+
+
+      //optimal solution:
+      get(index) {
+        if (index < 0 || index > this.length) return null;
+        if (index === 0) return this.head;
+        if (index === list.length - 1) return this.tail;
+
+        let middle = Math.floor(list.length / 2);
+        let count = 0;
+        let currHead = this.head;
+        let currTail = this.tail;
+
+        while (count !== index) {
+          if (index < middle) {
+            currHead = currHead.next;
+            count++
+            return currHead;
+          }
+          if (index >= middle) {
+            currTail = currTail.prev;
+            count--;
+            return currTail;
+          }
+        }
+
+      }
+
+      set(index, val) {
+        //take the index and update the node in this index to be this value.
+        if (!this.head) return undefined;
+        let getNode = this.get(index);
+        getNode.val = val;
+        return getNode;
+      }
+
+      insert(index, value) {
+        if (!this.head) this.unshift(val);
+        if (index > this.length || index < 0) return undefined;
+        if (index === this.length) this.push(val);
+        let newNode = new Node(value);
+        let curr = this.get(index);
+        let previous = this.get(index - 1);
+        previous.next = newNode;
+        newNode.next = curr;
+        curr.prev = newNode;
+        newNode.prev = previous;
+        this.length++;
+      }
+
+
+
+
+      //0   1  2  3 
+
+      remove(index, position) {
+        if (!this.head) return undefined;
+        if (index > this.length || index < 0) return undefined;
+        if (index === this.length - 1) this.pop();
+        let previous = this.get(index - 1);
+        let curr = this.get(index);
+        let nextNode = this.get(index + 1);
+        curr = previous;
+        curr.next = nextNode;
+        nextNode.prev = curr;
+        this.length--;
+        return curr;
+      }
+
+    }
+
+    console.log("c%---------->Push method to a double linked list", 'color: black;font-size:30px');
+    let list = new DoubleLinkedList();
+    list.push(0);
+    list.push(1);
+    list.push(2);
+    list.push(3);
+
+
+    // list.unshift(10)
+    console.log(list);
+
+    console.log("%c---------->print to array Method", 'color:red;font-size:30px');
+
+
+    console.log(list.print());
+
+    console.log("%c---------->Get Method", 'color:blue;font-size:30px');
+    console.log(list.get(2));
+
+
+    list.remove(2, 2);
+
+    console.log(list)
+    console.log(list.print());
+
+
+
+  </script>
+
+</body>
+
+</html>

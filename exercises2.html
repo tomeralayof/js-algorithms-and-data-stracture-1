@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    //add numbers to a string:
+    console.log("counting string caracters:")
+    function addNumberToString(str) {
+      let counter = 1;
+      let i = 0;
+      let result = "";
+      while (i < str.length) {
+        if (str[i] == str[i + 1]) {
+          counter++
+        }
+
+        else {
+          let addition = str[i].concat(counter);
+          result = result.concat(addition);
+          counter = 1;
+        }
+
+        i++;
+      }
+      return result;
+    }
+
+
+    let str = "ttomeeeert";
+    console.log(addNumberToString(str));
+
+
+
+
+    console.log("Richest Customer Wealth");
+
+
+    function richestWealth(accounts) {
+      let maxWealth = 0;
+      for (let i = 0; i < accounts.length; i++) {
+        let account = accounts[i];
+        let cutWealth = 0;
+        for (let j = 0; j < account.length; j++) {
+          cutWealth += account[j]
+        }
+        maxWealth = Math.max(cutWealth)
+      }
+      return maxWealth;
+
+    }
+
+
+    let total = [[1, 2, 3], [1, 2, 12], [100000, 100000]];
+
+
+    console.log(richestWealth(total));
+
+    console.log("merge 2 sorted arrays");
+
+
+
+
+
+    function mergeTwoSortedArrays(l1, l2) {
+      let i = 0;
+      let j = 0;
+      let result = []
+
+      while (i < l1.length && j < l2.length) {
+        if (l1[i] < l2[j]) {
+          result.push(l1[i]);
+          i++
+        }
+        else {
+          result.push(l2[j]);
+          j++
+        }
+        while (i < l1.length) {
+          result.push(l1[i]);
+          i++
+        }
+        while (j < l2.length) {
+          result.push(l2[j]);
+          j++
+        }
+      }
+      return result;
+    }
+
+    function mergeSort(arr) {
+      if (arr.length <= 1) return arr;
+      //slicing left and right until they are sorted:
+      let middle = Math.floor(arr.length / 2);
+      let sliceRight = mergeSort(arr.slice(0, middle));
+      let sliceLeft = mergeSort(arr.slice(middle));
+      return mergeTwoSortedArrays(sliceRight, sliceLeft)
+    }
+
+
+    console.log("merge sorting algoritem");
+    console.log(mergeSort([]));
+
+
+
+
+
+
+
+
+
+
+
+    function countStringCharacters(str) {
+      let i = 0;
+      let count = 1;
+      let result = "";
+      let addition = "";
+
+      while (i < str.length) {
+        if (str[i] == str[i + 1]) count++;
+        else {
+          addition = str[i].concat(count);
+          result = result.concat(addition);
+          count = 1;
+        }
+        i++;
+      }
+
+      return result;
+    }
+
+
+    let elianWired = "tttt omeeeeeeeeeeeeeeeeerk"
+
+    console.log("***exercise result***");
+    console.log(countStringCharacters(elianWired));
+
+
+
+
+    //increment 1 to the end value of the array
+
+    console.log("increment one to the end of the array");
+
+    function incrementToEnd(arr) {
+
+      let arrLen = arr.length - 1;
+      arr[arrLen] = arr[arrLen] + 1
+      return arr;
+    }
+
+
+    let arrayush = [4, 3, 2, 1];
+
+    console.log(incrementToEnd(arrayush));
+
+
+
+
+
+
+
+    console.log("reverse array");
+
+
+
+    function reverseArray(arr) {
+      let result = [];
+      for (let i of arr) {
+        result.unshift(i);
+      }
+      return result;
+    }
+
+    let arrToReserve = [1, 2, 3, 4];
+    console.log(reverseArray(arrToReserve));
+
+
+    function reverseIt(arr) {
+      let start = 0;
+      let end = arr.length - 1;
+      while (start < end) {
+        let temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+      }
+      return arr;
+    }
+
+    let arrrrr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+
+
+
+
+
+    console.log(reverseIt(arrrrr));
+
+
+    function isPalindrom(int) {
+      let newArr = [];
+      let stringedInt = int.toString();
+      for (let i = 0; i < stringedInt.length; i++) {
+        newArr.push(stringedInt[i])
+      }
+
+      let start = 0;
+      let end = newArr.length - 1;
+
+      while (start < end) {
+        if (newArr[start] === newArr[end]) {
+          newArr.shift();
+          newArr.pop();
+        }
+        start++
+        end--
+        if ((newArr.length === 1) || (!newArr.length)) return true;
+
+      }
+      return false;
+    }
+
+
+    let int = 1221;
+
+    console.log(isPalindrom(int));
+
+
+    let arr = [1, 2, 3, 4];
+    arr.slice(2);
+    console.log(arr)
+
+  </script>
+
+</body>
+
+</html>

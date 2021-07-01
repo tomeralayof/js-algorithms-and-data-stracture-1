@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    class Node {
+      constructor(val) {
+        this.val = val;
+        this.next = null;
+      }
+    }
+
+    class Stack {
+      constructor() {
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+      }
+
+      unshift(val) {
+        //take the element and put it to be on the first place in the list.
+        let newNode = new Node(val);
+        if (!this.first) {
+          this.first = newNode;
+          this.last = newNode;
+        }
+        let curFirst = this.first;
+        this.first = newNode;
+        newNode.next = curFirst;
+        this.last.next = null;
+        this.size++
+      }
+
+      shift() {
+        //remove the first item in the list.
+        if (!this.first) return undefined;
+        let curFirst = this.first;
+        this.first = curFirst.next;
+        this.first.next = curFirst.next.next;
+        this.size--;
+      }
+    }
+
+    let list = new Stack();
+    list.unshift(1);
+    list.unshift(2);
+    list.unshift(3);
+    list.unshift(4);
+
+    list.shift();
+    list.shift();
+    list.shift();
+    console.log(list);
+
+
+
+
+  </script>
+
+</body>
+
+</html>

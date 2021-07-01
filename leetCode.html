@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    console.log("----------> Leet Code Exercises:");
+    console.log("Exercise number 1: Fizz Buzz Algoritem");
+
+
+    //ex. number 1:
+    function fizzBuzz(int) {
+      let result = [];
+
+      for (let i = 0; i <= int; i++) {
+        result.push(i.toString());
+        if (result[i] % 3 === 0 && result[i] % 5 === 0) {
+          result[i] = "FizzBuzz"
+        }
+        if (result[i] % 3 === 0) {
+          result[i] = "Fizz"
+        }
+        if (result[i] % 5 === 0) {
+          result[i] = "Buzz"
+        }
+      };
+
+      result.shift()
+      return result;
+    }
+
+    console.log(fizzBuzz(16));
+
+
+    console.log("Exercise number 2: Reverse String:");
+
+    //ex. number 2:
+    function reverseString(s) {
+      s.reverse()
+      return s
+    }
+    const arr = ["h", "e", "l", "l", "o"]
+    console.log(reverseString(arr))
+
+
+    console.log("---------->Searching Algoritem");
+    console.log("Linear Search Pseudocode exercise:");
+
+    function linearSearch(arr, num) {
+      let result;
+      for (let i = 0; i < arr.length; i++) {
+        result = arr.indexOf(num);
+      }
+      return result;
+    }
+
+    function index(arr, num) {
+      return arr.indexOf(num)
+    }
+
+    console.log(linearSearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 10));
+
+    console.log("----------> Binary Search Algoritem: ");
+    console.log("Ex. number 1: number binary search");
+
+
+    function binarySearchInArr(arr, elem) {
+      arr = arr.sort();
+      console.log(arr)
+      let start = 0;
+      let end = arr.length - 1;
+      let middle = Math.floor((start + end) / 2);
+
+      while (arr[middle] !== elem && start <= end) {
+        if (elem < arr[middle]) end = middle - 1;
+        else start = middle + 1;
+        middle = Math.floor((start + end) / 2);
+      }
+      return arr[middle] === elem ? middle : -1;
+    }
+
+    let arrSorted = [50, 11, 15, 17, 20, 37, 1];
+    console.log(binarySearchInArr(arrSorted, 20));
+    console.log("ex. number 2: naive string search:");
+
+
+
+    function naiveStringSearch(str1, str2) {
+      let counter = 0;
+      for (let i = 0; i < str1.length; i++) {
+        for (let j = 0; j < str2.length; j++) {
+          if (str2[j] !== str1[i + j]) {
+            break;
+          }
+          if (j === str2.length - 1) counter++
+        }
+      }
+
+      return counter;
+    }
+
+    const str1 = "omgju";
+    const str2 = "omg"
+
+    console.log(naiveStringSearch(str1, str2))
+
+    console.log("linear array check")
+
+
+    function linearFounder(arr) {
+      let lookUp = {};
+      let result = 0;
+
+      for (let i = 0; i < arr.length; i++) {
+        let number = arr[i];
+        lookUp[number] ? lookUp[number] += 1 : lookUp[number] = 1
+      }
+      console.log(lookUp)
+      for (let key in lookUp) {
+        if (lookUp[key] === 1) {
+          return key
+        }
+
+      }
+      return result;
+    }
+
+
+
+    let arrToCheck = [2, 2, 1, 1, 3, 3, 4]
+    console.log(linearFounder(arrToCheck));
+
+
+    console.log("----------> max profit for every single day");
+
+    function maxProfit(prices) {
+      let profit = 0;
+      for (let i = 0; i < prices.length; i++) {
+        if (prices[i] > prices[i - 1]) profit += prices[i] - prices[i - 1]
+      }
+      return profit;
+    }
+
+    let prices = [7, 1, 5, 3, 6, 4];
+    console.log(maxProfit(prices));
+
+    console.log("max Profit For Single Day");
+
+
+
+    function maxProfitForSingleDay(prices) {
+
+      let temp = 0
+
+      for (let i = 0; i < prices.length; i++) {
+        let temp = 0;
+        for (let j = 0; j < prices.length; j++) {
+          temp += prices[j] - prices[i]
+          max = Math.max(temp)
+        }
+      }
+
+      return temp;
+
+    }
+    let pricess = [7, 1, 5, 3, 6, 4];
+
+    console.log(maxProfitForSingleDay(pricess));
+
+
+
+
+    console.log("Majority Element");
+
+
+    function majorityElement(nums) {
+      let lookUp = {};
+      let max = 0;
+
+      for (let i = 0; i < nums.length; i++) {
+        let number = nums[i];
+        lookUp[number] ? lookUp[number] += 1 : lookUp[number] = 1;
+      }
+
+      for (let key in lookUp) {
+
+        if (lookUp[key] > Math.floor(nums.length / 3)) return key;
+
+      }
+
+    }
+
+    console.log(majorityElement([10, 10, 10, 2, 3, 4]));
+
+
+
+
+    let arrrrrr = [1, 2, 3, 4, 5, 6, 5, 5, 11]
+
+    console.log(Math.floor(arrrrrr.length / 2)) // 4
+
+    console.log("move zero exercise:")
+
+    function moveZero(nums) {
+
+      let newArr = [];
+
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) newArr.push(nums[i])
+      }
+
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === 0) newArr.push(nums[i])
+      }
+
+      return newArr
+
+    }
+
+
+    let arrZe = [0, 1, 0, 3, 12]
+
+    console.log(moveZero(arrZe))
+
+
+    function isAnagram(s, t) {
+      if (s.length !== t.length) return false;
+      let lookUp = {};
+      let lookUp2 = {};
+      for (let i = 0; i < s.length; i++) {
+        let letter = s[i];
+        lookUp[letter] ? lookUp[letter] += 1 : lookUp[letter] = 1;
+      }
+      for (let j = 0; j < t.length; j++) {
+        let letter = t[j];
+        lookUp2[letter] ? lookUp2[letter] += 1 : lookUp2[letter] = 1;
+      }
+      for (let key in lookUp) {
+        if (!(key) in lookUp2) return false;
+        if (lookUp[key] !== lookUp2[key]) return false;
+      }
+      return true;
+    }
+
+
+
+    function containDuplicate(nums) {
+
+      let lookUp = {};
+
+      for (let i = 0; i < nums.length; i++) {
+        let number = nums[i]
+        lookUp[number] ? lookUp[number] += 1 : lookUp[number] = 1;
+      }
+
+      for (let key in lookUp) {
+        if (lookUp[key] > 1) return true
+      }
+
+      return false;
+
+    }
+
+
+    console.log("happy number");
+
+    function happyNumber(n) {
+
+      console.log(n % 10);
+      console.log(Math.floor(n / 10));
+
+      let seen = new Set();
+
+
+
+      return false;
+    };
+
+
+    console.log("Merge Two Sorted Lists");
+
+
+    function mergeTwoLists(l1, l2) {
+      let newArr = [];
+      for (let i = 0; i < l1.length; i++) {
+        newArr.push(l1[i])
+      }
+      for (let j = 0; j < l2.length; j++) {
+        newArr.push(l2[j])
+      }
+      function compareNumbers(a, b) {
+        return a - b;
+      }
+      newArr.sort(compareNumbers)
+      return newArr;
+    }
+
+
+    let list1 = [4, 3, 2, 1];
+
+    let list2 = [10, 9, 8, 7, 6, 5];
+
+    console.log(mergeTwoLists(list1, list2));
+
+
+    console.log("missing number in the array");
+
+    function missingNumber(nums) {
+
+      function compareNumbers(a, b) {
+        return a - b;
+      }
+
+      let result = 0;
+      let sortedNumbers = nums.sort(compareNumbers);
+      if (sortedNumbers.length === 1 && sortedNumbers[0] === 1) return 0;
+
+      for (let i = 0; i < sortedNumbers.length; i++) {
+        if (nums[i] - nums[i - 1] === 2) {
+          result = nums[i] - 1;
+
+
+
+        }
+        else {
+          result = sortedNumbers.length
+        }
+      }
+
+
+      return result;
+    }
+
+    let arrtocheck = [3, 0, 1];
+
+    console.log(missingNumber(arrtocheck));
+
+    console.log("Remove Duplicates from Sorted Array");
+
+
+
+    function removeDuplicates(nums) {
+      let ht = {};
+      let arrZeroDuplicate = [];
+      for (let i = 0; i < nums.length; i++) {
+        ht[nums[i]] = true;
+      }
+
+      for (let key in ht) {
+        arrZeroDuplicate.push(key);
+      }
+
+      arrZeroDuplicate = arrZeroDuplicate.map((i) => Number(i));
+      return arrZeroDuplicate;
+    }
+
+    let arrToDuplicate = [1, 1, 2];
+    console.log(removeDuplicates(arrToDuplicate));
+
+
+    console.log("another solution");
+
+
+    function bubbleSort(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+          if (arr[j] > arr[j + 1]) {
+            let temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+          }
+        }
+      }
+      return arr;
+    }
+
+
+    console.log(bubbleSort([5, 4, 3, 2, 1]));
+
+
+    function selectionSort(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        let lowest = i;
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr[j] < arr[lowest]) {
+            lowest = j;
+          }
+        }
+        let temp = arr[i];
+        arr[i] = arr[lowest]
+        arr[lowest] = temp;
+      }
+      return arr;
+    }
+
+    console.log(selectionSort([5, 4, 3, 2, 1]));
+
+    function recursiveSortedString(str) {
+      if (str.length < 1) return str;
+      return recursiveSortedString(str.slice(1)) + str[0];
+    }
+
+
+    let sub = "tomer";
+    console.log(recursiveSortedString(sub))
+
+
+
+
+    console.log("*******************");
+
+
+
+    function capitalizeFirst(arr) {
+      let newArr = [];
+      newArr.push(arr[0].toUpperCase());
+      result = newArr.concut(newArr[0]);
+      return result + capitalizeFirst(arr.splice(1))
+    }
+
+    //capitalizeFirst(['car','taco','banana']); // ['Car','Taco','Banana']
+
+    let arri = ["avi", "tomer", "shon"];
+
+    console.log(arri[0].toUpperCase([0, 0]));
+
+
+
+
+
+    function isPanagram(str) {
+      if (!str.length) return true;
+      if (str[0] !== str[str.length - 1]) return false;
+      if (str[0] === str[str.length - 1]) {
+        isPanagram(str.slice(1, -1));
+      }
+      return true;
+    }
+
+
+    function capitalizeFirst(arr) {
+      if (arr.length < 1) return arr;
+      let newArr = [];
+      let upperFirstLetter = arr[0].charAt(0).toUpperCase();
+      let rest = arr[0].slice(1);
+      let finalVal = upperFirstLetter + rest;
+      newArr.push(finalVal);
+      return newArr = newArr.concat(capitalizeFirst(arr.splice(1)));
+    }
+
+    let arr123 = ['tomer', 'avi'];
+    console.log(capitalizeFirst(arr123))
+
+
+
+
+    function capitalizeWords(arr) {
+      if (arr.length < 1) return arr;
+      let newArr = [];
+      newArr.push(arr[0].toUpperCase());
+      return newArr = newArr.concat(capitalizeWords(arr.splice(1)))
+    }
+
+
+    let words = ['i', 'am', 'learning', 'recursion'];
+
+
+    console.log(capitalizeWords(words));
+
+    var obj1 = {
+      outer: 2,
+      obj: {
+        inner: 2,
+        otherObj: {
+          superInner: 2,
+          notANumber: true,
+          alsoNotANumber: "yup"
+        }
+      }
+    }
+
+
+
+
+    const obj11 = {
+      stuff: "foo",
+      data: {
+        val: {
+          thing: {
+            info: "bar",
+            moreInfo: {
+              evenMoreInfo: {
+                weMadeIt: "baz"
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+    function collectStrings(obj) {
+      let stringArr = [];
+
+      for (let key in obj) {
+        if (typeof obj[key] === "string") {
+          stringArr.push(obj[key])
+        }
+        else if (typeof obj[key] === "object") {
+          stringArr = stringArr.concat(collectStrings(obj[key]))
+        }
+      }
+
+      return stringArr;
+
+    }
+
+    collectStrings(obj11) // ["foo", "bar", "baz"])
+
+    console.log(collectStrings(obj11));
+
+
+    let obey = {
+      num: 1,
+      test: [],
+      data: {
+        val: 4,
+        info: {
+          isRight: true,
+          random: 66
+        }
+      }
+    }
+
+
+    function stringifyNumbers(obj) {
+      let newObj = {};
+      for (let key in obj) {
+        if (typeof obj[key] === "number") {
+          newObj[key] = obj[key].toString()
+        }
+        else if (typeof obj === "object" && !Array.isArray(obj[key])) {
+          newObj[key] = stringifyNumbers(obj[key])
+        }
+        else newObj[key] = obj[key]
+      }
+      return newObj;
+    }
+
+
+    function reserveString(str) {
+
+      let counter = 0;
+      let start = 0;
+      let next = start + 1;
+      let newStr = "";
+      let singleStr = "";
+      let finalString = "";
+
+      while (start < str.length - 1) {
+
+        if (str[start] == str[next]) {
+          counter++;
+          start++;
+          next++
+          newStr = str[start - 1] + counter;
+        }
+
+        if (str[start] !== str[next]) {
+          counter = 1;
+          start++
+          next++
+          singleStr += str[start] + counter;
+        }
+
+      }
+
+      console.log("this is the new str", newStr)
+      finalString = newStr + singleStr;
+      return finalString
+
+    }
+
+    console.log(reserveString("tttomert"));
+
+
+    function maxWealth(arr) {
+
+
+      for (let i = 0; i < arr.length; arr++) {
+        console.log(arr[i])
+      }
+
+
+      return arr;
+    }
+
+    let arrToCheck1 = [[1, 2, 3], [7, 6, 5]];
+
+
+    console.log(maxWealth(arrToCheck1));
+
+
+    function mergeSortedArrays(arr1, arr2) {
+      let result = [];
+      let i = 0;
+      let j = 0;
+
+      while (i < arr1.length && j < arr2.length) {
+        if (arr1[i] < arr2[j]) {
+          result.push(arr1[i]);
+          i++
+        }
+
+        else {
+          result.push(arr2[j]);
+          j++
+        }
+
+        while (i < arr1.length) {
+          result.push(arr1[i])
+          i++
+
+        }
+        while (j < arr2.length) {
+          result.push(arr2[j])
+          j++
+        }
+      }
+      return result;
+    }
+
+
+    let firstArray = [1, 10, 50];
+
+    let secondArray = [2, 14, 99, 100];
+    console.log(mergeSortedArrays(firstArray, secondArray));
+
+    //output: [1,2,10,14,30,99,50,100]
+
+    console.log("add numbers to a string");
+
+
+
+
+
+
+
+
+    var twoSum = (nums, target) => {
+      let newArr = [];
+      let arr = [...nums];
+
+      function compare(a, b) {
+        return a - b;
+      }
+
+      arr = arr.sort(compare);
+
+      let start = 0;
+      let end = arr.length - 1;
+
+      while (start < end) {
+        let sum = arr[start] + arr[end];
+        if (sum === target) {
+          newArr.push(arr[start], arr[end]);
+          break;
+        }
+        else if (sum > target) end--;
+        else start++
+      }
+
+      for (let i = 0; i < nums.length; i++) {
+
+      }
+      console.log(newArr);
+
+    }
+
+
+    console.log(twoSum([3, 2, 4], 6));
+
+    //2,3,4 => 6;
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    class Node {
+      constructor(val) {
+        this.val = val;
+        this.next = null;
+      }
+    }
+
+    class SinglyLinkedList {
+      constructor() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+      }
+      push(val) {
+        var newNode = new Node(val);
+        if (!this.head) {
+          this.head = newNode;
+          this.tail = this.head;
+        } else {
+          this.tail.next = newNode;
+          this.tail = newNode;
+        }
+        this.length++;
+
+        return this;
+      }
+
+      pop() {
+        if (!this.head) return undefined;
+        let curHead = this.head;
+        let temp = curHead;
+
+        // remove the last element from the list.
+        while (curHead.next) {
+          temp = curHead;
+          curHead = curHead.next;
+        }
+
+        if (this.length === 0) {
+          this.head = null;
+          this.tail = null;
+          this.length = 0;
+        }
+
+        this.tail = temp;
+        this.length--;
+        this.tail.next = null;
+        return this;
+      }
+
+      print() {
+        let arr = [];
+        let curr = this.head;
+        while (curr) {
+          arr.push(curr.val)
+          curr = curr.next
+        }
+        return arr;
+      }
+
+      get(index) {
+        if (index < 0 || index > list.length) return undefined;
+        let count = 0;
+        let cur = this.head;
+        while (count !== index) {
+          cur = cur.next
+          count++
+        }
+        return cur;
+      }
+
+      insert(index, value) {
+        if (index > this.length || index < 0) return undefined;
+        if (!this.head) this.push(val);
+
+        let newNode = new Node(value);
+        if (index === this.length) {
+          this.tail = newNode;
+          this.tail.next = null;
+        }
+        let cur = this.get(index);
+        let prev = this.get(index - 1);
+        prev.next = newNode;
+        newNode.next = cur;
+        this.length++;
+      }
+
+      set(index, value) {
+        if (index < 0 || index > this.length) return undefined;
+        let newNode = new Node(value);
+        let prev = this.get(index - 1);
+        let cur = this.get(index);
+
+        if (index === 0) {
+          this.head = newNode;
+          newNode.next = cur.next;
+        }
+        else {
+          prev.next = newNode;
+          newNode.next = cur.next;
+        }
+        return this;
+      }
+
+
+      rotate(index) {
+        let head = this.head;
+        let tail = this.tail;
+        tail = head;
+        let newHead = this.get(index);
+        let prev = this.get(index - 1);
+        prev.next = null;
+        this.head = newHead;
+        this.tail.next = tail;
+        this.tail = tail;
+      }
+
+
+      remove(index) {
+        if (index < 0 || index > list.length) return undefined;
+        if (index === list.length - 1) return this.pop();
+        let prev = this.get(index - 1);
+        let curr = this.get(index);
+        curr = prev;
+        curr.next = prev.next.next;
+        this.length--;
+        return curr;
+      }
+
+    }
+
+
+    let list = new SinglyLinkedList();
+    list.push(1);
+    list.push(2);
+    list.push(3);
+    list.push(4);
+    list.push(5);
+
+
+
+
+    list.rotate(2);
+
+
+    console.log("%c---------->this is the list", 'color:red;font-size:30px')
+    console.log(list);
+
+    console.log("%c---------->this is the arr", 'color:blue;font-size:35px');
+    console.log(list.print());
+
+    //stacks exercise:
+    console.log("%c---------->Stack Exercise", 'color: purple;font-size:40px');
+
+    class NodeStack {
+      constructor(val) {
+        this.val = val;
+        this.next = null;
+      }
+    }
+
+    class Stack {
+      constructor() {
+        this.first = null;
+        this.last = null;
+        this.length = 0;
+      }
+
+      //push method:
+      push(val) {
+        let newNode = new NodeStack(val);
+        if (!this.first) {
+          this.first = newNode;
+          this.last = newNode;
+        }
+
+        else {
+          let oldFirst = this.first;
+          this.first = newNode;
+          newNode.next = oldFirst;
+        }
+
+        this.length++;
+        return this;
+      }
+
+      cb4 = () => {
+        if (!this.first) return undefined;
+
+        if (this.length === 1) {
+          this.first = null;
+          this.last = null;
+          this.length = 0;
+        }
+        let oldFirst = this.first;
+        this.first = oldFirst.next;
+        this.first.next = oldFirst.next.next;
+        this.length--;
+        return this;
+
+      }
+
+      pop(cb) {
+        setTimeout(cb, 2000);
+      }
+
+      printStack() {
+        let arr = [];
+        let current = this.first;
+        while (current) {
+          arr.push(current.val);
+          current = current.next;
+        }
+        return arr;
+      }
+
+    }
+
+    let stackList = new Stack();
+
+    stackList.push(1);
+    stackList.push(2);
+    stackList.push(3);
+
+    stackList.pop();
+    stackList.pop();
+    console.log(stackList);
+
+    console.log(stackList.printStack());
+
+    console.log("%c----------->Arrays/Strings exercise", 'color:brown;font-size:40px');
+
+
+    function constractNote(str1, str2) {
+      let cc1 = {};
+      let cc2 = {};
+      for (let i = 0; i < str1.length; i++) {
+        let letter = str1[i];
+        cc1[letter] ? cc1[letter] += 1 : cc1[letter] = 1;
+      }
+      for (let i = 0; i < str2.length; i++) {
+        let letter = str2[i];
+        cc2[letter] ? cc2[letter] += 1 : cc2[letter] = 1;
+      }
+
+      if (str1.length < str2.length) {
+        for (let key in cc1) {
+          if (!(key in cc2)) return false;
+          if (cc1[key] !== cc2[key]) return false;
+        }
+      } else {
+        for (let key in cc2) {
+          if (!(key in cc1)) return false;
+          if (cc1[key] !== cc2[key]) return false;
+        }
+      }
+
+      return true;
+    }
+
+    str1 = 'k234aabbcc';
+    str2 = 'aabbcc';
+
+    console.log(constractNote(str1, str2));
+
+
+    //remove duplicate from an array:
+    function removeDuplicates(arr) {
+
+      let newArr = [];
+      let numCounter = {};
+
+      for (let i = 0; i < arr.length; i++) {
+        let num = arr[i];
+        numCounter[num] ? numCounter[num] += 1 : numCounter[num] = 1;
+      }
+
+      for (let key in numCounter) {
+        if (numCounter[key] !== 1) newArr.push(key)
+
+      }
+      newArr = newArr.map((val) => Number(val));
+      return newArr;
+    }
+    let arr = [1, 2, 3, 4, 4, 5];
+    console.log(removeDuplicates(arr));
+
+
+
+    //find pair: 
+    function findPair(arr, n) {
+      for (let i = 0; i < arr.length; i++) {
+        if (n === arr[i]) return true;
+      }
+      return false
+    }
+
+
+    let arr11 = [1, 2, 3, 4];
+    let n = 20;
+
+    console.log(findPair(arr11, n));
+
+
+
+  </script>
+
+</body>
+
+</html>

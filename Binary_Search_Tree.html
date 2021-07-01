@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    //in the trees we store sorted data 
+
+    //tree =  in generic tree each node can have any children it wants. node can have 1 or tousants of children and it doesnt matter.
+
+    // binary tree = in binary tree, each node can have maximum 2 children.
+
+    //binary search tree = Binary search tree is a special case of binary tree. same as binary tree, the binary search tree can contain maximum 2 children. every child that less then the parent goes to the left side, and every child that grater then the parent goes to the right side.
+
+    class Node {
+      constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+      }
+    }
+
+    class BinarySearchTree {
+      constructor() {
+        this.root = null;
+      }
+      insert(val) {
+        let newNode = new Node(val);
+        if (this.root === null) {
+          this.root = newNode;
+          return this;
+        }
+
+        else {
+          let current = this.root;
+          while (true) {
+            if (current)
+              if (val < current.val && current.left === null) {
+                current.left = newNode;
+                return this;
+              }
+            // current = current.left;
+
+
+            if (val > current.val && current.right === null) {
+              current.right = newNode;
+              return this;
+            }
+            // current = current.right;
+            val.current < current.val ? current = current.left : current = current.right;
+          }
+
+
+        }
+
+
+      }
+
+
+
+
+      // insert(value) {
+      //   var newNode = new Node(value);
+      //   if (this.root === null) {
+      //     this.root = newNode;
+      //     return this;
+      //   }
+      //   var current = this.root;
+      //   while (true) {
+      //     if (value === current.value) return undefined;
+      //     if (value < current.value) {
+      //       if (current.left === null) {
+      //         current.left = newNode;
+      //         return this;
+      //       }
+      //       current = current.left;
+      //     } else {
+      //       if (current.right === null) {
+      //         current.right = newNode;
+      //         return this;
+      //       }
+      //       current = current.right;
+      //     }
+      //   }
+      // }
+
+
+
+
+    }
+
+
+    let tree = new BinarySearchTree();
+    tree.insert(10);
+
+
+    tree.insert(15);
+    tree.insert(5);
+    tree.insert(1);
+
+
+    console.log(tree);
+
+  </script>
+
+</body>
+
+</html>

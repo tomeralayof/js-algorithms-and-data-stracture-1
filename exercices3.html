@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    //randomely shuffle array of values
+    function shuffleArray(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        let RandomIndex = Math.floor(Math.random() * (i));
+        const temp = arr[i];
+        arr[i] = arr[RandomIndex];
+        arr[RandomIndex] = temp;
+      }
+      return arr;
+    }
+
+    console.log(shuffleArray([10, 20, 30, 40]));
+
+    //count maximum value appear on array.
+    function maxApperenceValue(arr) {
+      let lookUp = {};
+      let temp = 0;
+      let valOfMx = 0;
+      for (let i = 0; i < arr.length; i++) {
+        let letter = arr[i];
+        lookUp[letter] ? lookUp[letter] += 1 : lookUp[letter] = 1
+      }
+      for (let key in lookUp) {
+        temp = Math.max(temp, lookUp[key]);
+        if (lookUp[key] === temp) valOfMx = key
+      }
+      return valOfMx;
+    }
+    let arrAppear = [1, 2, 2, 3];
+    console.log(maxApperenceValue(arrAppear));
+
+
+    //delete every item whice is not a number inside an array
+    function deleteNonNumbers(arr) {
+      let newArr = [];
+      for (let i = 0; i < arr.length; i++) {
+        if (typeof arr[i] === "number") newArr.push(arr[i]);
+      }
+      return newArr;
+    }
+    let arrToDeleteNonNumbers = [1, true, false, 20, 30, null, []];
+    console.log(deleteNonNumbers(arrToDeleteNonNumbers));
+
+
+    //remove duplicates
+    function removeDuplicated(arr) {
+      let lookUp = {};
+      let newArr = [];
+      for (let i = 0; i < arr.length; i++) {
+        let number = arr[i];
+        lookUp[number] = true
+      }
+      for (let key in lookUp) {
+        newArr.push(key)
+      }
+      newArr = newArr.map((val) => Number(val))
+      return newArr;
+    }
+    let arrDuplicate = [1, 1, 2, 2, 3, 3];
+    console.log('%c---------->remove duplicated', 'color: red;font-size:25px')
+    console.log(removeDuplicated(arrDuplicate));
+
+
+    //split an array
+    function splitSubArrays(arr, size) {
+      let newArr = [];
+      let index = 0;
+      while (index < arr.length) {
+        newArr.push(arr.slice(index, size + index))
+        index += size
+      }
+      return newArr;
+    }
+    let arrToSlice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let num = 5;
+    console.log('%c---------->devide sub arrays into pieces', 'color: red;font-size:25px')
+
+    console.log(splitSubArrays(arrToSlice, num));
+
+
+    //print a new array of a unique value of 2 arrays
+    function twoArraysDiffrence(subArray) {
+      let lookUp = {};
+      let lookUp2 = {};
+      let result1 = [];
+      let arr1 = subArray[0];
+      let arr2 = subArray[1];
+
+      for (let i = 0; i < arr1.length; i++) {
+        let number = arr1[i]
+        lookUp[number] = true;
+      }
+
+      for (let j = 0; j < arr2.length; j++) {
+        let number = arr2[j];
+        lookUp2[number] = true;
+      }
+
+      for (let key in lookUp) {
+        if (!(key in lookUp2)) result1.push(key)
+      }
+
+      for (let key in lookUp2) {
+        if (!(key in lookUp)) result1.push(key)
+      }
+
+      return result1;
+    }
+
+    let arr1 = [6, 2, 3];
+    let arr2 = [3, 5, 6];
+    console.log(twoArraysDiffrence([arr1, arr2]));
+
+
+
+    function returnArrayIndex(arr, num) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === num) return i;
+      }
+      return -1
+    }
+
+    let arrToCheck = [10, 2, 3];
+    console.log(arrToCheck.indexOf(arrToCheck[1]));
+    let number = 3;
+    console.log(returnArrayIndex(arrToCheck, number)); //1
+
+
+
+    //slice from last array by given int
+    function lastElem(arr, int) {
+      if (int > arr.length - 1) return null;
+      let cut = arr.length - int
+      arr = arr.slice(0, cut);
+      return arr;
+    }
+    let arr = [1, 2, 3, 4];
+    let n = 3
+    console.log("%c---------->slice from the last arr by given int", 'color:black;font-size:40px')
+    console.log(lastElem(arr, n));
+
+    //slice from front array
+    function sliceFromFront(arr, int) {
+      if (int > arr.length) return null;
+      return arr.slice(int)
+    }
+
+    console.log("%c---------->slice from front output", 'color:green;font-size:25px');
+    console.log(sliceFromFront([1, 2, 3, 4, 5], 3));
+
+    //slice: (0,num) => leave the array the indexes between 0 to num.
+    //slice (num) => slice from the begining the amount of required indexes.
+
+
+    myColor = ["Red", "Green", "White", "Black"];
+    let result = ""
+    result = myColor.toString();
+    console.log(result);
+
+    myColor = ["Red", "Green", "White", "Black"];
+    console.log('%c----------> join method', 'color:green;font-size:25px')
+    console.log(myColor.toString());
+    console.log(myColor.join());
+    console.log(myColor.join('+'));
+
+    //ex. 8
+    function mostFrequent(arr) {
+      let lookUp = {};
+      let temp = 0;
+      let valOfMx = 0;
+      for (let i = 0; i < arr.length; i++) {
+        let key = arr[i];
+        lookUp[key] ? lookUp[key] += 1 : lookUp[key] = 1
+      }
+      for (let key in lookUp) {
+        temp = Math.max(temp, lookUp[key]);
+        if (temp === lookUp[key]) valOfMx = key;
+      }
+      return valOfMx;
+    }
+    let arrFrequent = ["1", "a", "a", "b", "b", "c", "b"];
+    console.log('%c----------> most frequent value inside an array', 'color:black;font-size:25px')
+    console.log(mostFrequent(arrFrequent))
+
+    //ex9 - swapp strings: 
+    function swapString(str) {
+      let result = "";
+      for (let i = 0; i < str.length; i++) {
+        let string = str[i];
+        let strToSee = string;
+        if (string === strToSee.toLowerCase()) result = result.concat(string.toUpperCase())
+        else result = result.concat(string.toLowerCase());
+      }
+      return result;
+    }
+    let str = "Tomer";
+    console.log('%c---------->swap string characters(lower/upper)', 'color: purple;font-size:25px')
+    console.log(swapString(str));
+
+    function addRow(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].unshift(`row number ${i}`)
+      }
+      return arr;
+    }
+    console.log('%c-------------->output rows ', 'color: red; font-size:20px')
+    let a = [[1, 2, 1, 24], [8, 11, 9, 4], [7, 0, 7, 27], [7, 4, 28, 14], [3, 10, 26, 7]];
+    console.log(addRow(a))
+
+
+    //ex 34: 
+    function nthlargest(arr, zise) {
+      arr = arr.slice(0, zise);
+      return Math.max(...arr)
+    }
+
+    console.log('%c----------> max value in sub array', 'color: blue;font-size: 20px');
+    console.log(nthlargest([43, 56, 23, 89, 88, 90, 99, 652], 4));
+
+    //ex. 36
+    function singleNum(size, val) {
+      let arr = [];
+      for (let i = 0; i < size; i++) {
+        arr.push(val);
+      }
+      return arr;
+    }
+    console.log("---------->single number to an array")
+    console.log(singleNum(6, 0));
+
+
+    function move(arr, i, j) {
+      let temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp
+      return arr;
+    }
+    console.log("change array position");
+    console.log(move([10, 20, 30, 40, 50], 0, 2));
+
+
+    var color = ["Blue ", "Green", "Red", "Orange", "Violet", "Indigo", "Yellow ", "green"];
+
+    function Ordinal(n) {
+      var o = ["th", "st", "nd", "rd"],
+        x = n % 100;
+      return x + (o[(x - 20) % 10] || o[x] || o[0]);
+    }
+    for (n = 0; n < color.length; n++) {
+      var ordinal = n + 1;
+      var output = (Ordinal(ordinal) + " choice is " + color[n] + ".");
+      console.log(output);
+    }
+
+    //binary search
+    function binarySearch(items, value) {
+      var firstIndex = 0,
+        lastIndex = items.length - 1,
+        middleIndex = Math.floor((lastIndex + firstIndex) / 2);
+      while (items[middleIndex] != value && firstIndex < lastIndex) {
+        if (value < items[middleIndex]) lastIndex = middleIndex - 1;
+        else if (value > items[middleIndex]) firstIndex = middleIndex + 1;
+        middleIndex = Math.floor((lastIndex + firstIndex) / 2);
+      }
+      return (items[middleIndex] != value) ? -1 : middleIndex;
+    }
+
+    console.log("%c----------->Binary Search", 'color:red;font-size:40px');
+    console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2));
+
+  </script>
+
+
+
+</body>
+
+</html>

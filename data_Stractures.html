@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    console.log("---------->classes review");
+    class Student {
+      constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.late = 0;
+        this.score = [];
+
+      }
+      //instance method=> this kind of method reffer to s specific object:
+      fullName() {
+        return `your full name is: ${this.firstName} ${this.lastName}`;
+      }
+      addLate() {
+        this.late += 1;
+        if (this.late >= 3) return `you are not learning here anymore`;
+        return `this student has been late ${this.late} times`;
+      }
+
+      addScore(score) {
+        this.score.push(score);
+        return this.score;
+      }
+
+      calculateAverageScores() {
+        let sum = this.score.reduce((a, b) => {
+          return a + b;
+        });
+        return sum / this.score.length;
+      }
+
+    }
+
+    let firstStudent = new Student("tomer", "alayof");
+    let secStudent = new Student("shiraz", "atias");
+    console.log("the full object of the first student:", firstStudent);
+    console.log("the full object of the second student:", secStudent);
+    console.log("the first name of the first student is:", firstStudent.firstName)
+    let fullName = firstStudent.fullName();
+    console.log(fullName);
+    let firstStudentLate = firstStudent.addLate();
+    console.log(firstStudentLate);
+    //add score to the array:
+    secStudent.addScore(1);
+
+
+
+    class Node {
+      constructor(val) {
+        this.val = val;
+        this.next = null;
+      }
+    }
+
+    class SinglyLinkedList {
+      constructor() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+      }
+
+      push(val) {
+        let newNode = new Node(val);
+
+        if (!this.head) {
+          this.head = newNode;
+          this.tail = newNode;
+        }
+        else {
+          this.tail.next = newNode;
+          this.tail = newNode;
+        }
+        this.length++
+        return this;
+      }
+      pop() {
+        if (!this.head) return undefined;
+        let current = this.head;
+        let newTail = current;
+
+        while (current.next) {
+          newTail = current;
+          current = current.next;
+        }
+        if (this.length === 0) {
+          this.head = null;
+          this.tail = null;
+          this.length = 0;
+        }
+        this.tail = newTail;
+        this.length--;
+        this.tail.next = null;
+      }
+
+      shift() {
+        if (!this.head) return undefined;
+        this.head = this.head.next;
+        this.length--;
+        if (this.length === 0) {
+          this.head = null;
+          this.tail = null;
+          this.length = 0;
+        }
+
+        return this.head;
+
+      }
+
+      unshift(val) {
+        let newNode = new Node(val);
+        if (!this.head) {
+          this.head = newNode;
+          this.tail = newNode;
+        }
+        else {
+          let head = this.head;
+          this.head = newNode;
+          this.head.next = head;
+        }
+        this.length++;
+        return this;
+      }
+
+      get(index) {
+        if (index < 0 || index > this.length) return null;
+        let count = 0;
+        let head = this.head;
+        let curVal = head;
+
+        //tomer's solution
+
+        // while (curVal.next !== null) {
+        //   if (index === 0) return this.head.val;
+        //   curVal = curVal.next;
+        //   count++
+        //   if (count === index) return curVal.val;
+        //   else return null;
+        // }
+
+        //another solution:
+        while (count !== index) {
+          curVal = curVal.next;
+          count++
+        }
+        return curVal
+      }
+
+      set(val, index) {
+        let nodeValueInRejectionIndex = this.get(index);
+        if (!nodeValueInRejectionIndex) return false;
+        nodeValueInRejectionIndex.val = val;
+        return true;
+      }
+      insert(index, value) {
+        if (index < 0 || index > this.length) return false;
+        if (index === this.length) this.push(value);
+        if (index === 0) this.unshift(value);
+        let newNode = new Node(value);
+        //tomer solution:
+        let curValue = this.get(index);
+        let prev = this.get(index - 1);
+        prev.next = newNode;
+        newNode.next = curValue;
+        this.length++;
+      }
+
+      removeItem(index) {
+        if (index < 0 || index >= this.length) return undefined;
+        if (index === 0) return this.shift();
+        if (index === this.length - 1) return this.pop();
+        let prev = this.get(index - 1);
+        let curVal = this.get(index);
+        curVal = prev;
+        curVal.next = prev.next.next;
+        this.length--;
+        return this;
+      }
+
+      reverseList() {
+        let node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        let next;
+        let prev = null;
+        for (let i = 0; i < this.length; i++) {
+          next = node.next;
+          node.next = prev;
+          prev = node;
+          node = next;
+        }
+        return this;
+      }
+
+      print() {
+        let arr = [];
+        let current = this.head;
+        while (current) {
+          arr.push(current.val);
+          current = current.next;
+        }
+        return arr;
+      }
+    }
+
+    let list = new SinglyLinkedList();
+    list.push(0);
+    list.push(1);
+    list.push(2);
+    list.push(3);
+
+    list.reverseList();
+
+    console.log("%c---------->linked list in an array + reverse list", 'color:red;font-size:30px');
+    console.log(list.print());
+
+
+
+  </script>
+
+</body>
+
+</html>
